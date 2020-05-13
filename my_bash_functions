@@ -1,57 +1,47 @@
 # bapt() is a function that will run an `apt install` command in the background to free up your terminal
 function bapt() {
-    declare -gA help_msg=()
+    SCRIPT_ID=$$
+    SHELL_ID=$BASHPID
+    MSG_PREFIX="$SHELL_ID -- $SCRIPT_ID : "
+    declare -a help_msg=()
     # dump passed args to array variable
     if [[ $# -gt 1 ]]; then
-        logger -s "more than one arg"
-        args=("$@")
+        logger -s "$MSG_PREFIX More than 1 argument was passed correctly. Script continuing."
+        args=("$@") # capturing passed arguments for future usage
     else
-        help_msg+="not enough args passed to function. Need more 2 or more arguments."
-        help_msg+="USAGE: bapt <install> <appname>"
-        help_msg+="The first arg passed above is the word 'install' which is the same as saying"
-        help_msg+="sudo apt install"
-        help_msg+="the second arguments and onward are the app names and/or options"
-        help_msg+=""
-        logger -s "${help_msg[@]}"
+        help_msg+=("$MSG_PREFIX")
+        help_msg+=("Not enough args passed to function. Need 2 or more arguments.")
+        help_msg+=("USAGE: bapt <install> <appname>")
+        help_msg+=("The first arg passed above is the word 'install' which is the same as saying")
+        help_msg+=("sudo apt install")
+        help_msg+=("the second arguments and onward are the app names and/or options")
+        help_msg+=("")
+        echo "$MSG_PREFIX ${help_msg[@]}"
         return 1
-
     fi
 
     # test command argument. ONLY WORKING WITH "INSTALL" cmd for NOW
-    case "${args[0]}" in
+    case "$1" in
     install)
-        logger -s "running install on ${args[@]:1}"
+        logger -s "$MSG_PREFIX" "Running install on ${args[@]:1}"
         ;;
     *)
-        logger -s "That command is unsupported with bapt() at this time."
-        logger -s "HELP MESSAGE: $help_msg[@]"
+        logger "$MSG_PREFIX That command is unsupported with bapt() at this time."
+        logger "$MSG_PREFIX HELP MESSAGE: $help_msg[@]"
         return 1
         ;;
     esac
 
     sudo bash -c "apt $* -y >/dev/null 2>&1 & disown"
-    apt_procID = $!
+    apt_procID=$!
 
-    # array to capture spawned processes and kill them at the end of script
-    declare -A proc_spawns=()
-    while [ True ]; do
+    logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
-        [[ ! $(ps -ef | grep $apt_procID | grep -v grep) ]] && logger -s "couldn't find apt! EXITING!" || logger -s "apt is RUNNING!"
-        pgrep apt >/dev/null 2>&1 &
-        proc_spawns+=$!
-    done
-
-    logger -s "Installation of ${args[@]} is now completed."
-    if [[ -z $proc_spawns ]]; then
-        for proc in $proc_spawns; do
-            kill -9 $proc
-        done
-        unset proc_spawns
+    if [ -z $apt_procID ]; then
+        return $apt_procID
     else
-        echo "INFO: No spawned background process found in: proc_spawns array"
+        return 1
     fi
-
-    return 0
 }
 
 # Separate way to fail out of a function without exiting the shell

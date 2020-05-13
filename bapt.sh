@@ -1,63 +1,50 @@
 #!/bin/bash
 
-# UGLY WORK IN PROGRESS 
-
 function bapt() {
-    # halt on errors
-    set -e
-    echo "inside function"
-    APT_HELP="/usr/bin/apt help"
-    APT_INSTALL_HELP="/usr/bin/apt install help"
-
+    SCRIPT_ID=$$
+    SHELL_ID=$BASHPID
+    MSG_PREFIX="$SHELL_ID -- $SCRIPT_ID : "
+    declare -a help_msg=()
     # dump passed args to array variable
-    if [ $#  > 1 ]; then
-        echo "more than one arg"
-        args=("$@")
+    if [[ $# -gt 1 ]]; then
+        logger -s "$MSG_PREFIX More than 1 argument was passed correctly. Script continuing."
+        args=("$@") # capturing passed arguments for future usage
     else
-        echo "not enough args"
-        eval "$APT_HELP"
-        exit 1
+        help_msg+=("$MSG_PREFIX")
+        help_msg+=("Not enough args passed to function. Need 2 or more arguments.")
+        help_msg+=("USAGE: bapt <install> <appname>")
+        help_msg+=("The first arg passed above is the word 'install' which is the same as saying")
+        help_msg+=("sudo apt install")
+        help_msg+=("the second arguments and onward are the app names and/or options")
+        help_msg+=("")
+        echo "$MSG_PREFIX ${help_msg[@]}"
+        return 1
     fi
 
-    # first argument should be the apt command the user wants to run
-    aptcmd="${args[0]}"
-    echo ""
-    echo "aptcmd: $aptcmd"
-    echo "args: ${args[@]}"
-    echo ""
-    unset "args[$1]"
-    echo ""
-    echo "after unset"
-    echo "args: ${args[@]}"
-    echo ""
-
     # test command argument. ONLY WORKING WITH "INSTALL" cmd for NOW
-    case "${aptcmd}" in         # TODO: Add support for more apt commands
-    install) #do stuff
-        echo "running install on ${args[@]}"
+    case "$1" in
+    install)
+        logger -s "$MSG_PREFIX" "Running install on ${args[@]:1}"
         ;;
     *)
-        echo "That command is unsupported with bapt() at this time."
-        eval "$APT_INSTALL_HELP"
-        exit 1
+        logger "$MSG_PREFIX That command is unsupported with bapt() at this time."
+        logger "$MSG_PREFIX HELP MESSAGE: $help_msg[@]"
+        return 1
         ;;
     esac
 
-    sudo bash -c "apt $aptcmd ${args[@]} -y >/dev/null 2>&1 & disown"
+    sudo bash -c "apt $* -y >/dev/null 2>&1 & disown"
+    apt_procID=$!
 
-    until [ $? == 1 ]; do    # FIXME: broken loop never exits
-        sleep 1
-        echo "Waiting for install to finish..."
-        echo "...${?}"
-        $(/usr/bin/pgrep apt >/dev/null) &
-    done
+    logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
-    echo "Installation of ${args[@]} is now completed."
-    set +e
+    if [ -z $apt_procID ]; then
+        return $apt_procID
+    else
+        return 1
+    fi
 }
 
-if [ $# ] >1; then
-    bapt $@
-else
-    echo "not enough arguments passed"
+if [ $# -gt 1 ]; then
+    bapt $*
 fi
