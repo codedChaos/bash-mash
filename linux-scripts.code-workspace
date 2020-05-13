@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../infra-as-code/terraform/projects"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../gists"
+		}
+	],
+	"settings": {}
+}

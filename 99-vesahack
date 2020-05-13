@@ -1,0 +1,4 @@
+Section "Device"
+    Identifier "Screen0"
+    VideoRam 256000
+EndSection

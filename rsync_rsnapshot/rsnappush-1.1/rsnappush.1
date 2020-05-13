@@ -1,0 +1,54 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "RSNAPPUSH" "1" "November 2019" "" ""
+.
+.SH "NAME"
+\fBrsnappush\fR \- rsync\-based pushed incremental snapshot
+.
+.SH "SYNOPSIS"
+\fBrsnappush\fR [\fB\-h\fR] [\fB\-r RSYNC_OPT\fR] [\fB\-q\fR] \fISOURCE_PATH\fR [\fIACCOUNT:\fR]\fIDEST_PATH\fR
+.
+.SH "DESCRIPTION"
+\fBrsnappush\fR is a wrapper around rsync(1) to assist in file\-level incremental snapshots that are pushed to a destination\. Unchanged files are hard\-linked\. Files are plainly laid out in a directory for each snapshot: \fIDEST_PATH\fR/\fIbackup\-YYYYmmdd\-HHMM\fR/ for easy access and restoration\.
+.
+.P
+\fISOURCE_PATH\fR is any local path\.
+.
+.P
+\fIDEST_PATH\fR is a path, local or remote\. If remote, \fIACCOUNT\fR specifies an ssh(1)\-compatible account description, such as \fIUSER\fR@\fIHOST\fR\.
+.
+.P
+Additionally, under \fIDEST_PATH\fR there is a \fIpermissions\fR/ directory created that has compressed output from getfacl(1)\. setfacl(1) can be used to restore permissions from this file once it is uncompressed\.
+.
+.SH "EXAMPLE"
+.
+.nf
+
+rsnappush \-\-rsync\-opt=\-\-partial\-dir=/home/user2/rsync\-partial \e
+          /home/user user2@remotehost:backups/
+.
+.fi
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+display a help message
+.
+.TP
+\fB\-r\fR, \fB\-\-rsync\-opt=RSYNC_OPT\fR
+pass\-thru options to rsync(1)\. Use the \'=\' syntax to pass through options, and include prefixing dashes\. See \fIEXAMPLE\fR for details\.
+.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+emit less output
+.
+.SH "AUTHORS"
+rsnappush is written by Frank Tobin: \fIftobin@neverending\.org\fR, \fIhttps://www\.neverending\.org/\fR
+.
+.P
+rsnappush is released under the Mozilla Public License 2\.0 \fIhttps://opensource\.org/licenses/MPL\-2\.0\fR\.
+.
+.SH "SEE ALSO"
+rsync(1), ssh(1)

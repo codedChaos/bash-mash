@@ -1,0 +1,6 @@
+.*/***
+backup-temp/***
+operating\ systems/***
+veeam/***
+vmware/***
+Google-Drive/***
