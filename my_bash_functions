@@ -37,9 +37,10 @@ function bapt() {
 
     logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
-    if [ ! -z "$apt_procID" ]; then
-        return $apt_procID
+    if [ ! -n "$apt_procID" ]; then
+        logger "INFO: $0 : apt_procid = $apt_procID"
 	stalk "apt" & disown
+	return 0
     else
         return 1
     fi
@@ -56,7 +57,7 @@ function stalk() {
 
 	while [ `pgrep "$1"` ]; do
 		logger "INFO: $0 : monitoring $1 for closure. Sleep 5 seconds."
-		sleep 5
+		#sleep 5
 	done
 	if [ ! `pgrep "$1"` ]; then
 		logger -s "INFO: $0 : process not found. monitoring stopped for $1"
