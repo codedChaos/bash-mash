@@ -37,9 +37,10 @@ function bapt() {
 
     logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
-    if [ ! -z "$apt_procID" ]; then
-        return $apt_procID
+    if [ ! -n "$apt_procID" ]; then
+        logger "INFO: $0 : apt_procid = $apt_procID"
 	stalk "apt" & disown
+	return 0
     else
         return 1
     fi
