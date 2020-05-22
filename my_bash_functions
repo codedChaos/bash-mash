@@ -6,7 +6,7 @@ function bapt() {
     declare -a help_msg=()
     # dump passed args to array variable
     if [[ $# -gt 1 ]]; then
-        logger -s "$MSG_PREFIX More than 1 argument was passed correctly. Script continuing."
+        #logger -s "$MSG_PREFIX More than 1 argument was passed correctly. Script continuing."
         args=("$@") # capturing passed arguments for future usage
     else
         help_msg+=("$MSG_PREFIX")
@@ -23,11 +23,11 @@ function bapt() {
     # test command argument. ONLY WORKING WITH "INSTALL" cmd for NOW
     case "$1" in
     install)
-        logger -s "$MSG_PREFIX" "Running install on ${args[@]:1}"
+        #logger -s "$MSG_PREFIX" "Running install on ${args[@]:1}"
         ;;
     *)
-        logger "$MSG_PREFIX That command is unsupported with bapt() at this time."
-        logger "$MSG_PREFIX HELP MESSAGE: $help_msg[@]"
+        #logger "$MSG_PREFIX That command is unsupported with bapt() at this time."
+        #logger "$MSG_PREFIX HELP MESSAGE: $help_msg[@]"
         return 1
         ;;
     esac
@@ -35,7 +35,7 @@ function bapt() {
     sudo bash -c "apt $* -y >/dev/null 2>&1 & disown"
     apt_procID=$!
 
-    logger "$MSG_PREFIX apt Proces ID: $apt_procID"
+    #logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
     if [ -z $apt_procID ]; then
         return $apt_procID

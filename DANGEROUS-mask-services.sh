@@ -13,6 +13,9 @@ else
     servicename=$1
 fi
 
+# WARNING
+echo "****DANGER DANGER DANGER**** : This script is DANGEROUS and may completely mask whatever services that are named like your argument. This could be very very VERY BAD!!! PLEASE USE WITH CAUTION!!! ****DANGER DANGER DANGER****
+
 for i in $(systemctl list-units | grep $servicename | awk '{ print $1 }' | grep $servicename)
     do
         echo "masking and stopping: $i"
