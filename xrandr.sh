@@ -29,10 +29,10 @@ xrandr --verbose --newmode $MODELINE
 case $DESKTOP_SESSION in
     *plasma*)
         echo "Plasma desktop session. Using DP1-1 and DP1-2 for monitor reference." $(date) >> $LOGFILE
-        xrandr --verbose --addmode DP1-1 $RESOLUTION
-        xrandr --verbose --addmode DP1-2 $RESOLUTION
-        xrandr --verbose --output DP1-1 --mode $RESOLUTION
-        xrandr --verbose --output DP1-2 --mode $RESOLUTION --right-of DP1-1
+        xrandr --verbose --addmode DP-1-1 $RESOLUTION
+        xrandr --verbose --addmode DP-1-2 $RESOLUTION
+        xrandr --verbose --output DP-1-1 --mode $RESOLUTION
+        xrandr --verbose --output DP-1-2 --mode $RESOLUTION --right-of DP1-1
     	;;
     *gnome*)
         xrandr --verbose --addmode DP1-1 $RESOLUTION
