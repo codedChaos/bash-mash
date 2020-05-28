@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# get the factorial of a number
 fac_func () {
 	if [ $1 -eq 1 ]; then
 		echo 1

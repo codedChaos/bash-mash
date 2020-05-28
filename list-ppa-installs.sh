@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# UNDER CONSTRUCTION
 # write command that takes arguments to list ppa repos, installed apps, and available apps in the repos
 
 # lsppa -list-repos -list-installed -list-available

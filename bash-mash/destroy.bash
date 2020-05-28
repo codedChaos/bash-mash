@@ -1,7 +1,7 @@
 destroy () { 
     local -n variable=$1
     declare -p $1 &>/dev/null || return -1 # Return if variable not exist
-    local reslne result flags=${variable@a}
+    local resline result flags=${variable@a}
     [ -z "$flags" ] || [ "${flags//*r*}" ] && { 
         unset $1    # Don't run gdb if variable is not readonly.
         return $?

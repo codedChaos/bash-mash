@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Rename file extensions in a dir
+
 E_BAD_ARGS=65
 
 case $# in

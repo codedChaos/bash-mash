@@ -1,6 +1,9 @@
 #!/bin/bash
 # legnth.sh
 
+# playing with script arguments
+# educational only
+
 E_NO_ARGS=65
 
 if [ $# -eq 0 ]; then

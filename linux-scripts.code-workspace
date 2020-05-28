@@ -10,5 +10,9 @@
 			"path": "../gists"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"shellcheck.enableQuickFix": true,
+		"shellcheck.executablePath": "/usr/bin/shellcheck",
+		"shellcheck.useWorkspaceRootAsCwd": true
+	}
 }
