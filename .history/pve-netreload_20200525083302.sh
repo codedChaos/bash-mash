@@ -1,4 +1,10 @@
 #!/bin/bash
+<<<<<<< HEAD
+=======
+
+# NOT WORKING ENTIRELY NEEDS MORE TESTING
+
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 # USAGE: ./netreload
 # PURPOSE: reload all network interfaces for proxmox; especially useful when openvswitching is used
 
@@ -8,7 +14,11 @@
 # variables for network/interfaces files
 ONET=/etc/network/interfaces
 NNET=/etc/network/interfaces.new
+<<<<<<< HEAD
+NET="10.0.120.1"
+=======
 NET="<IP ADDRESS>"
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 REVNET_RESULT=""
 SAVNET_RESULT=""
 CHGNET_RESULT=""
@@ -116,37 +126,44 @@ netdiff () {
 	fi
 }
 
+question () {
+	# some code for querying the user for input
+	if [ "$#" != 1 ]; then
+		echo "passed more than one argument to question function"
+	else
+		local Q=$1
+		read -p "$Q [y,n]" ANSWER
+		if [[ "$ANSWER" == "y" || "$ANSWER" == "Y" ]]; then
+			QSTION_RESULT=0
+		else
+			QSTION_RESULT=1
+		fi
+	fi
+}
+
 NDIFF_RESULT="$(netdiff $ONET $NNET)"
 if [ "$NDIFF_RESULT" ]; then
 	echo "files are different"
 fi
 
-read -p "backup $ONET? [y,n]" ANSWER
-if [[ "$ANSWER" == "y" || "$ANSWER" == "Y" ]]; then
-	QSTION_RESULT=0
+question 'copy new network/interfaces to old?'
+if [ $QSTION_RESULT ]; then
+	echo "question result $QSTION_RESULT"
 	#savenet
-else
-	QSTION_RESULT=1
 fi
 
-echo "question result $QSTION_RESULT"
-echo "from backup questions" 
-echo
-
-if [ "$SAVNET_RESULT" == 0 ]; then
+if [ $SAVNET_RESULT ]; then
 	echo "saved $ONET successfully"
 fi
 
-read -p "$ONET with $NNET? [y,n]" ANSWER
-QSTION_RESULT="$([[ $ANSWER == 'y' || $ANSWER == 'Y' ]] && echo 0 || echo 1)"
-
-if [[ "$QSTION_RESULT" == 0 ]]; then
+question "change interfaces.new to interfaces?"
+if [ $QSTION_RESULT ]; then
     echo "question result $QSTION_RESULT"
     echo "changing interfaces.new to interfaces"
     #changenet
 fi
 
-if [ "$CHGNET_RESULT" == 0 ]; then
+if [ $CHGNET_RESULT ]; then
 	echo "$? is var ? and : $CHGNET_RESULT is chgnet_result"
 	#restartnet
 	testnet $NET

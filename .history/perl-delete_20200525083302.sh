@@ -1,7 +1,10 @@
 #!/usr/local/bin/bash
+<<<<<<< HEAD
+=======
 
 # TODO: WORKS MOSTLY BUT NEEDS REFINEMENT
 
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 # LOGGING
 LOG="hunter_killer.log"
 exec 3>&1 4>&2

@@ -34,7 +34,14 @@ IVAL=${3:-alpha} # default to rsnapshot alpha interval (a.k.a. hourly)
 # start SSHD listening on port 1999 for connections and
 # forward them back through the tunnel to dest backup target
 
+<<<<<<< HEAD
+ssh -vR 1999:localhost:22 root@172.16.0.116 &
+# commented out to attempt to handle the rsnapshot connection
+# inside of the rsnapshot.conf file
+# ssh -p 1998 root@172.16.0.116
+=======
 ssh -vR 1999:localhost:22 root@<IP Address> &
 # commented out to attempt to handle the rsnapshot connection
 # inside of the rsnapshot.conf file
 # ssh -p 1998 root@<IP address>
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4

@@ -3,7 +3,11 @@
 # command line arguments
 args=("$@")
 if $# <> 1 then
+<<<<<<< HEAD
+    echo "Too many args specified: $# specified, but 1 is the maximum."
+=======
     echo "Too many args specified: $# specified. 1 is the maximum."
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
     echo " "
     echo "command usage: ./mask-services-with-name-like.sh <service name particle> (enter)"
     exit -1

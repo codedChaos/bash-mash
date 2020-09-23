@@ -4,5 +4,19 @@
       "path": "."
     }
   ],
-  "settings": {}
+  "settings": {
+    "jira-plugin.workingProject": "",
+    "gistpad.playgrounds.showConsole": true,
+    "gistpad.playgrounds.markupLanguage": "markdown",
+    "git.allowForcePush": true,
+    "git.autoStash": true,
+    "git.postCommitCommand": "push",
+    "git.scanRepositories": [
+      "c:\\users\\wsmyth\\code\\"
+    ],
+    "git.showPushSuccessNotification": true,
+    "gremlins.showInProblemPane": true,
+    "hungryDelete.followAbovelineIndent": true,
+    "hungryDelete.considerIncreaseIndentPattern": true
+  }
 }

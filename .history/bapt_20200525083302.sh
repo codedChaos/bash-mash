@@ -1,6 +1,9 @@
 #!/bin/bash
 
+<<<<<<< HEAD
+=======
 # bapt() is a function that will run an `apt install` command in the background to free up your terminal
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 function bapt() {
     SCRIPT_ID=$$
     SHELL_ID=$BASHPID
@@ -39,15 +42,22 @@ function bapt() {
 
     logger "$MSG_PREFIX apt Proces ID: $apt_procID"
 
+<<<<<<< HEAD
+    if [ -z $apt_procID ]; then
+        return $apt_procID
+=======
     if [ ! -n "$apt_procID" ]; then
         logger "INFO: $0 : apt_procid = $apt_procID"
 	stalk "apt" & disown
 	return 0
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
     else
         return 1
     fi
 }
 
+<<<<<<< HEAD
+=======
 # monitor process in the background and report when it closes
 function stalk() {
 	if [ $# -eq 1 ]; then
@@ -66,6 +76,7 @@ function stalk() {
 	fi
 }
 
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 if [ $# -gt 1 ]; then
     bapt $*
 fi

@@ -97,9 +97,15 @@ wc
 man wc
 find . -type f -exec find . -samefile {} \; | wc
 find . -type f | wc
+<<<<<<< HEAD
+df ./wsmyth/
+du ./wsmyth/
+du -h ./wsmyth/
+=======
 df ./<username>/
 du ./<username>/
 du -h ./<username>/
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 ls -l
 find -samefile prefix32/
 find -same
@@ -108,14 +114,22 @@ find . -inum 45687440
 find ../ -inum 45687440
 cd ..
 ls
+<<<<<<< HEAD
+cd deblabmachine01/
+=======
 cd <computer name>/
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 ls
 cd 2020-02-21-02PM/
 ls -lioFG
 find ../ -inum 43168304
 cd home/
 ls
+<<<<<<< HEAD
+cd wsmyth/
+=======
 cd <username>/
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 ls
 find ../../../ -samefile hardcopy.0 
 ls -i
@@ -276,5 +290,3 @@ for f in ${FILES[@]}; do stat -f "$l $i" $f; done
 for f in ${FILES[@]}; do echo $f; done
 echo "${FILES[@]}"
 echo "${INODES[@]}"
-
-

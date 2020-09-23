@@ -8,7 +8,11 @@
 # variables for network/interfaces files
 ONET=/etc/network/interfaces
 NNET=/etc/network/interfaces.new
+<<<<<<< HEAD
+NET="10.0.120.1"
+=======
 NET="<IP ADDRESS>"
+>>>>>>> a2917f57a50afef94cb68f3d955d84cbbc6938d4
 REVNET_RESULT=""
 SAVNET_RESULT=""
 CHGNET_RESULT=""
