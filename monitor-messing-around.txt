@@ -1,0 +1,27 @@
+root@deblabmachine01:/home/wsmyth# cat /etc/sddm
+sddm/      sddm.conf
+root@deblabmachine01:/home/wsmyth# cat /etc/sddm.conf
+[Autologin]
+Relogin=false
+Session=
+User=
+[General]
+HaltCommand=
+RebootCommand=
+[Theme]
+Current=KDE-Story
+CursorTheme=Adwaita
+[Users]
+MaximumUid=60000
+MinimumUid=1000
+root@deblabmachine01:/home/wsmyth# vim /etc/sddm.conf
+root@deblabmachine01:/home/wsmyth# vim /etc/X11/xorg.conf.d/30-monitor.conf
+root@deblabmachine01:/home/wsmyth# vim /etc/environment
+root@deblabmachine01:/home/wsmyth# cat /etc/environment
+root@deblabmachine01:/home/wsmyth#
+
+
+
+# changed these things
+99-vesahack in x11 configs
+/usr/share/sddm/scripts/Xsetup - added lines after first two

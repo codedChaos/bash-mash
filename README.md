@@ -1,11 +1,4 @@
 # bash-mash
-a place where bash scripts are born    
+## BASH scripts and snippets
 
-## summary
-
- a place for all of my bash script ideas (some original; some not) can be kept. who knows? might even let other contributors in on the fun at some point.
-
-## Under Construction!
-
-## contact info
-William <devopsmyth@gmail.com>
+Just a storage place for all of my on-going scripts written in BASH for my Linux/Unix machines.

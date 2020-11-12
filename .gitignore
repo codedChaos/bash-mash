@@ -1,2 +1,2 @@
-.directory
-*.code-workspace
+.vscodemaybe/*
+bash/

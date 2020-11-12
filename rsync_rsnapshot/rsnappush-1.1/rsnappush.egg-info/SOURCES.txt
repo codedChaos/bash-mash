@@ -1,0 +1,12 @@
+ChangeLog.md
+INSTALL
+LICENSE
+MANIFEST.in
+README.md
+rsnappush
+rsnappush.1
+setup.py
+rsnappush.egg-info/PKG-INFO
+rsnappush.egg-info/SOURCES.txt
+rsnappush.egg-info/dependency_links.txt
+rsnappush.egg-info/top_level.txt
