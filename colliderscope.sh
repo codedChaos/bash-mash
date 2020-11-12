@@ -1,5 +1,5 @@
 #!/bin/bash
-# WORK IN PROGRESS
+# WORK IN PROGRESS - Last Edit 11/12/2020
 # display network interface collision statistics
 
 # get all available network dev listing commands using array
