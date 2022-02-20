@@ -7,7 +7,7 @@
 ######    LICENSE       ######
 ##############################
 showLicense() {
-TAB="$(printf '\t')"
+    TAB="$(printf '\t')"
 cat <<- LICENSE
     ${TAB} Copyright 2022 \"William J Smyth\" \©
     
@@ -33,43 +33,42 @@ LICENSE
 # HELP FUNCTIONS                                                                         #
 ##########################################################################################
 Help() {
-echo PROGRAM NAME: "${0:**/}"
+    echo PROGRAM NAME:  "${0##*/}"
 cat << EOF
-Description: Install .NET SDK for Linux via Apt source configuration
+    Description: Install .NET SDK for Linux via Apt source configuration
 
-[SYNTAX]
-$ $0 [-L|h|c|d|v|r|V|D]
+    [SYNTAX]
+        $ $0 [-L|h|c|d|v|r|V|D]
 
-[OPTIONS]
--L,                                     Print the license notification
--h,                                     Print this HelpMsg
--c </full/path/to/lsb_release>,         Set full-path to 'lsb_release' command (ex. /usr/bin/lsb_release [defualt])
--d <distro>,                            Set distro name to search for in repo (ex. ubuntu, debian, redhat, ...)
--v,                                     Set verbose level (ex. [-v] #default 0)
--r <release>,                           Set release for download (ex. -d ubuntu -r {trusty, focal, impish, ...})
--V,                                     Print Version information
--D </full/path/for/download>,           Set full-path to use for download directory (ex. /home/<username>/Downloads [defualt])
-
+    [OPTIONS]
+        -L,                                     Print the license notification
+        -h,                                     Print this HelpMsg
+        -c </full/path/to/lsb_release>,         Set full-path to 'lsb_release' command (ex. /usr/bin/lsb_release [defualt])
+        -d <distro>,                            Set distro name to search for in repo (ex. ubuntu, debian, redhat, ...)
+        -v,                                     Set verbose level (ex. [-v] #default 0)
+        -r <release>,                           Set release for download (ex. -d ubuntu -r {trusty, focal, impish, ...})
+        -V,                                     Print Version information
+        -D </full/path/for/download>,           Set full-path to use for download directory (ex. /home/<username>/Downloads [defualt])
 EOF
 }
 ##########################################################################################
 
-main() {
+MAIN() {
     ##########################################################################################
     # Main Program                                                                           #
     ##########################################################################################
 
     # Get command line arguments/options
-    while getopt "hLVc::d::v::r::" option; do
+    while getopt -n "${0##*/}" -o 'hLVc::d::v::r::' $@; do
         #echo "option: ${option}"
-        case "${option}" in
+        case $ARG in
             L)  # print license information
                 # echo "print license info"
                 L=${OPTARG}
                 showLicense
                 exit 0
                 ;;
-            h | *) # display this help message
+            \? | h | *) # display this help message
                 h=${ARG}
                 Help
                 [ "${h}" = "h" ] && exit 0 || exit 1001
@@ -78,7 +77,7 @@ main() {
     done
     shift $((OPTIND-1))
 
-    LSB_RELEASE_CMD="${c:-/usr/bin/lsb_release}" # allow user to specify path to lsb_release command on command line in first argument position
+    #LSB_RELEASE_CMD="${c:/usr/bin/lsb_release}" # allow user to specify path to lsb_release command on command line in first argument position
     # echo Command: "${LSB_RELEASE_CMD}"
 
     # Change to your Home Downloads directory
@@ -98,4 +97,4 @@ main() {
     # fi
 }
 
-main
+MAIN
