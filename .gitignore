@@ -1,3 +1,8 @@
 .directory
 *.code-workspace
+<<<<<<< Updated upstream
 .vscode/extensions.json
+=======
+.vscode/extensions.json
+*.*~   # temporary files
+>>>>>>> Stashed changes
